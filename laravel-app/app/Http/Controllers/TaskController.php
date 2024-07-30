@@ -130,6 +130,20 @@ class TaskController extends Controller
         return redirect()->route('tasks.index')->with('success', 'Task updated successfully.');
     }
 
+    public function showUser($id)
+    {
+        // Fetch the task
+        $task = Task::findOrFail($id);
+
+        // Fetch the users
+        $users = User::all()->keyBy('id');
+
+        return Inertia::render('Tasks/Show', [
+            'task' => $task,
+            'users' => $users,
+        ]);
+    }
+
     /**
      * Remove the specified resource from storage.
      */

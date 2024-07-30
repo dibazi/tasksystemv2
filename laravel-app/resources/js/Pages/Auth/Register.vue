@@ -13,6 +13,7 @@ const form = useForm({
     email: '',
     password: '',
     password_confirmation: '',
+    role: 'member', // Default role
     terms: false,
 });
 
@@ -60,6 +61,21 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
+                <InputLabel for="role" value="Role" />
+                <select
+                    id="role"
+                    v-model="form.role"
+                    class="mt-1 block w-full"
+                    required
+                >
+                    <option value="member">Member</option>
+                    <option value="manager">Manager</option>
+                    <option value="supervisor">Supervisor</option>
+                </select>
+                <InputError class="mt-2" :message="form.errors.role" />
+            </div>
+
+            <div class="mt-4">
                 <InputLabel for="password" value="Password" />
                 <TextInput
                     id="password"
@@ -91,7 +107,10 @@ const submit = () => {
                         <Checkbox id="terms" v-model:checked="form.terms" name="terms" required />
 
                         <div class="ms-2">
-                            I agree to the <a target="_blank" :href="route('terms.show')" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Terms of Service</a> and <a target="_blank" :href="route('policy.show')" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Privacy Policy</a>
+                            I agree to the 
+                            <a target="_blank" :href="route('terms.show')" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Terms of Service</a> 
+                            and 
+                            <a target="_blank" :href="route('policy.show')" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Privacy Policy</a>
                         </div>
                     </div>
                     <InputError class="mt-2" :message="form.errors.terms" />
